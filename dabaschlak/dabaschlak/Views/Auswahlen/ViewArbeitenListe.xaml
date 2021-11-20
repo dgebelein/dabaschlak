@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="dabaschlak.ViewArbeitenListe"
+			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			xmlns:local="clr-namespace:dabaschlak"
+			FontFamily="Calibri" FontSize="15"
+			mc:Ignorable="d" 
+			d:DesignHeight="300" d:DesignWidth="600">
+   <UserControl.Resources>
+
+      <ContextMenu x:Key="contextRow"  Style="{StaticResource MyContextMenuStyle}"  >
+
+         <MenuItem Header="Aktion anzeigen/bearbeiten" 				Command="{Binding Path=PropertiesCommand}">
+            <MenuItem.Icon>
+               <Image Source="pack://application:,,,/TtpResources;Component/Images/showel.png" Height="16"  Style="{StaticResource ButtonImageStyle}"/>
+            </MenuItem.Icon>
+         </MenuItem>
+
+         <Separator/>
+         <MenuItem Header="Aktion entfernen"				Command="{Binding Path=RemoveCommand}">
+            <MenuItem.Icon>
+               <Image Source="pack://application:,,,/TtpResources;Component/Images/edit-delete.png" Height="16" Style="{StaticResource ButtonImageStyle}" />
+            </MenuItem.Icon>
+         </MenuItem>
+
+      </ContextMenu>
+
+   </UserControl.Resources>
+
+
+
+<Grid Background="DarkGray">
+	<Grid.RowDefinitions>
+		<RowDefinition Height="80"/>
+		<RowDefinition Height="*"/>
+		<RowDefinition Height="80"/>
+	</Grid.RowDefinitions>
+
+   <StackPanel Orientation="Vertical">
+		<TextBlock Text="{Binding ArbeitenHeader}" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="Black" FontSize="22"  Margin="25,10,0,10"/>
+		<TextBlock Text="{Binding ArbeitenSubHeader}" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="Black"  FontStyle="Oblique" FontSize="18"  Margin="25,0,0,0"/>
+	</StackPanel>
+
+	<DataGrid  Name="_dgArbeiten" Grid.Row="1" ItemsSource="{Binding DataTableArbeiten}"  HeadersVisibility="Column" 
+			VerticalGridLinesBrush="Gray"
+			Margin="0,0"
+			Background="Gray"  BorderBrush="LightGray"
+			IsReadOnly="True"
+			CanUserAddRows="False"
+			CanUserDeleteRows="False"
+			SelectionUnit="FullRow"
+			SelectedItem ="{Binding SelectedRow}"
+			ColumnHeaderStyle="{StaticResource HeaderStyle}"  
+			CellStyle="{StaticResource MyDataGridCell}" 
+			ContextMenu="{StaticResource contextRow}"
+			AutoGenerateColumns="False" ContextMenuOpening="_dgArbeiten_ContextMenuOpening"
+	>
+		<DataGrid.Columns>
+			<DataGridTextColumn Binding="{Binding Datum, StringFormat=\{0:dd.MM.yyyy\}}"  MinWidth="80"    Header="Datum" /> 
+			<DataGridTextColumn Binding="{Binding PersonName}" Header="Person"/>
+			<DataGridTextColumn Binding="{Binding Aktion}" Header="Aktion"/>
+			<DataGridTextColumn Binding="{Binding NotizenLine}" Header="Notizen"  MinWidth="1000"/>
+		</DataGrid.Columns>
+	</DataGrid>
+
+         <Button  Grid.Row="2" Width="120" Height="35" Margin="0,0,50,0" HorizontalAlignment="Right" Command="{Binding Path=AddCommand}">
+         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <Image Source="pack://application:,,,/TtpResources;Component/Images/showel.png" Style="{StaticResource ButtonImageStyle}"
+							Height="18" Margin="0,0,5,0"/>
+            <Label Content="neue Aktion" VerticalAlignment="Center"  HorizontalAlignment="Left" Width="80"/>
+         </StackPanel>
+      </Button>
+
+</Grid>
+</UserControl>

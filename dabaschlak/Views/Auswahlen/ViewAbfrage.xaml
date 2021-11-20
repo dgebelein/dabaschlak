@@ -1,0 +1,27 @@
+﻿<UserControl	x:Class="dabaschlak.ViewAbfrage"
+					xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+					xmlns:local="clr-namespace:dabaschlak"
+					xmlns:Custom="http://schemas.awesomium.com/winfx" 
+					mc:Ignorable="d" 
+					d:DesignHeight="300" d:DesignWidth="800" 
+>
+   <Grid>
+      <Grid.ColumnDefinitions>
+         <ColumnDefinition Width="1*" MinWidth="150"/>
+         <ColumnDefinition Width="Auto"/>
+         <ColumnDefinition Width="1*" MinWidth="150"/>
+      </Grid.ColumnDefinitions>
+
+      <local:ViewAbfrageAuswahl Grid.Column="0" />
+      <GridSplitter Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Stretch" Width="2"  ShowsPreview="False" Background="White"/>
+      <Custom:WebControl Name="_aweBrowser"  Grid.Column="2" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch" 
+			ShowContextMenu="_aweBrowser_ShowContextMenu"
+			Unloaded="WindowUnloaded"/>
+
+<!--hier noch Buttons zum Drucken, Speichern, Exportieren-->
+
+   </Grid>
+</UserControl>

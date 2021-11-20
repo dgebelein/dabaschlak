@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="dabaschlak.ViewAbfrageAuswahl"
+				xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+				xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+				xmlns:local="clr-namespace:dabaschlak"
+				xmlns:utilities="clr-namespace:TTP.UiUtils;assembly=TtpUiUtils"
+				mc:Ignorable="d" 
+				d:DesignHeight="500"	d:DesignWidth="500"
+				FontFamily="Calibri"	FontSize="15"
+				Foreground="WhiteSmoke">
+	<UserControl.Resources>
+		<utilities:EnumBooleanConverter x:Key="enumBooleanConverter" />
+	</UserControl.Resources>
+
+	<Grid	Background="#003366"	>
+		<Grid.RowDefinitions>
+			<RowDefinition	Height="80"/>
+			<RowDefinition	Height="120"/>
+			<RowDefinition	Height="*"/>
+			<RowDefinition	Height="80"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition	Width="150"/>
+			<ColumnDefinition	Width="*"/>
+
+		</Grid.ColumnDefinitions>
+
+		<TextBlock	Grid.ColumnSpan="2"	Text="Erweiterte Abfrage" HorizontalAlignment="Left" VerticalAlignment="Center"	 FontSize="24"	 Margin="25,0,0,0"/>
+		<StackPanel	Grid.Row="1" Orientation="Vertical"	Margin="25,0,0,0">
+			<TextBlock Text="Suche nach:"	HorizontalAlignment="Left"	VerticalAlignment="Center"	  FontSize="18"/>
+			<StackPanel	Orientation="Vertical">
+				<RadioButton 
+							Margin="10,10,0,0"  FontWeight="Normal"
+							Content="Aktionen" 
+							IsChecked="{Binding Path=SearchTarget,	
+							Converter={StaticResource enumBooleanConverter}, ConverterParameter=Aktion}"/>
+				<RadioButton 
+							Margin="10,10,0,0" FontWeight="Normal"
+							Content="Versuchen" 
+							IsChecked="{Binding Path=SearchTarget,	
+							Converter={StaticResource enumBooleanConverter}, ConverterParameter=Versuch}"/>
+
+			</StackPanel>
+
+		</StackPanel>
+
+		<Button	Grid.Row="1" Grid.Column="1"	Width="150"	Height="55"	Margin="20,0,10,10" HorizontalAlignment="Left" Command="{Binding Path=ExecuteCommand}">
+			<StackPanel	Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+				<Image Source="pack://application:,,,/TtpResources;Component/Images/execute.png"	Style="{StaticResource ButtonImageStyle}"
+									Height="32"	Margin="15,0,10,0"/>
+				<Label Content="Ausführen"	VerticalAlignment="Center"	 FontSize="18" HorizontalAlignment="Left" Width="80"/>
+			</StackPanel>
+		</Button>
+
+		
+		<ScrollViewer Grid.Row="2"	Grid.ColumnSpan="2"  Grid.RowSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" >
+			<StackPanel	Orientation="Vertical">
+				<local:ViewAbfrageAuswahlVersuche Visibility="{Binding VisAuswahlVersuche}"/>
+				<local:ViewAbfrageAuswahlAktionen Visibility="{Binding VisAuswahlAktionen}"/>
+			</StackPanel>
+
+
+		</ScrollViewer>
+	
+	</Grid>
+</UserControl>

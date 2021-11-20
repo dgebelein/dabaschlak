@@ -1,0 +1,54 @@
+﻿<Window x:Class="dabaschlak.PropertyFlaeche"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:local="clr-namespace:dabaschlak"
+	WindowStyle="SingleBorderWindow" 
+	SizeToContent="WidthAndHeight" 
+	ResizeMode="NoResize"  WindowStartupLocation="CenterScreen"
+	FontFamily="Calibri" FontSize="15" Foreground="White" Background="#FF3B3B3C"
+>
+
+
+	<Window.Resources>
+			<ResourceDictionary>
+				<ResourceDictionary.MergedDictionaries>
+					<ResourceDictionary Source="pack://application:,,,/TtpTheme;component/TtpTheme.xaml"/>
+				</ResourceDictionary.MergedDictionaries>
+         
+      </ResourceDictionary>
+
+		</Window.Resources>
+
+<Grid Width="520" Height="430">
+	<Grid.RowDefinitions>
+		<RowDefinition Height="50"/>
+		<RowDefinition Height="50"/>
+		<RowDefinition Height="250"/>
+		<RowDefinition Height="80"/>
+	</Grid.RowDefinitions>
+
+	<Grid.ColumnDefinitions>
+		<ColumnDefinition Width="100"/>
+		<ColumnDefinition Width="400"/>
+	</Grid.ColumnDefinitions>
+
+	<TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,20,0,10">Versuchsfläche (Schlag/Kabine)</TextBlock>
+	<TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">Bezeichnung:</TextBlock>
+	<TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,5,0">Eigenschaften:</TextBlock>
+
+      <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource errorControl}" Width="300"  VerticalAlignment="Center" HorizontalAlignment="Left" IsReadOnly="{Binding IsPropReadOnly}"
+				 Text="{Binding PropBezeichnung, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"   />
+	<TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource errorControl}"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="220" IsReadOnly="{Binding IsPropReadOnly}"
+				TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding PropEigenschaften, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"   />
+	
+	<StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+	<Button Width="100" Height="35" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Margin="0,0,25,0"
+				Command="{Binding Path=PropCloseCommand}">Schließen</Button>
+	<Button Width="100" Height="35" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"  
+				Command="{Binding Path=PropUpdateCommand}">Übernehmen</Button>
+	</StackPanel>
+
+	</Grid>
+</Window>

@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="dabaschlak.ViewMeineNachrichten"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:dabaschlak"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+<Grid Background="DarkGray">
+	<Grid.RowDefinitions>
+		<RowDefinition Height="80"/>
+		<RowDefinition Height="*"/>
+		<RowDefinition Height="5"/>
+	</Grid.RowDefinitions>
+
+
+     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0">
+			<TextBlock Text=" Benachrichtigungen für: "   Foreground="Black" FontSize="20"   />
+			<TextBlock Text="{Binding HeaderPerson}"   Foreground="Black" FontSize="20"  FontStyle="Italic" />
+		</StackPanel>
+
+         <DataGrid  Name="_dgNachrichten" Grid.Row="1" ItemsSource="{Binding DataTableNachrichten}"  HeadersVisibility="Column" 
+			ScrollViewer.CanContentScroll="True" 
+			ScrollViewer.VerticalScrollBarVisibility="Auto"
+			ScrollViewer.HorizontalScrollBarVisibility="Auto"
+			VerticalGridLinesBrush="Gray"
+			Background="Gray"  BorderBrush="LightGray"
+			Margin="2,0"
+			IsReadOnly="True"
+			CanUserAddRows="False"
+			CanUserDeleteRows="False"
+			SelectionUnit="FullRow"
+			ColumnHeaderStyle="{StaticResource HeaderStyle}"  
+			CellStyle="{StaticResource MyDataGridCell}" 
+			AutoGenerateColumns="False">
+
+            <DataGrid.Columns>
+               <DataGridTextColumn Binding="{Binding Datum, StringFormat=\{0: dd.MM.yyyy \}}" Header="Datum"    />
+               <DataGridTextColumn Binding="{Binding VerBez}" Header="Versuch"/>
+               <DataGridTextColumn Binding="{Binding Standorte}" Header="Standort" />
+               <DataGridTextColumn Binding="{Binding Akteur}" Header="Ausführende(r)" />
+               <DataGridTextColumn Binding="{Binding Aktion}" Header="Aktion" />
+               <DataGridTextColumn Binding="{Binding NotizenLine}" Header="Notizen"  MinWidth="600"/>
+
+
+
+
+
+            </DataGrid.Columns>
+         </DataGrid>
+
+
+
+      <!--<DockPanel Grid.Row="2">
+		<StackPanel  Orientation="Vertical">
+			<StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Margin="20,5,0,10">
+				<CheckBox  Content="Anzeige beschränken auf das Jahr:"  Foreground="Black" VerticalAlignment="Center" IsChecked="{Binding DoFilterYears,Mode=TwoWay}"/>
+
+				<ComboBox Height="25" Width="80"  VerticalAlignment="Center"  HorizontalAlignment="Left" IsEditable="False"  Margin="5,0" IsEnabled="{Binding DoFilterYears}" 
+									ItemsSource="{Binding Path=Versuchsjahre}"
+									SelectedItem="{Binding Path=FilterJahr, ValidatesOnDataErrors=True}"/>
+			</StackPanel>
+
+			<StackPanel Orientation="Horizontal" DockPanel.Dock="Left" Margin="20,0,0,0">
+				<CheckBox  Content="nur Versuche anzeigen für:" Foreground="Black" VerticalAlignment="Center" IsChecked="{Binding DoFilterTypes,Mode=TwoWay}"/>
+
+				<ComboBox Height="25" Width="150"  VerticalAlignment="Center"  HorizontalAlignment="Left" IsEditable="False"  Margin="5,0" IsEnabled="{Binding DoFilterTypes}" 
+									ItemsSource="{Binding Path=Flaechentypen}"
+									SelectedItem="{Binding Path=FilterFlaeTyp, ValidatesOnDataErrors=True}"/>
+			</StackPanel>
+
+		</StackPanel>
+		
+		 <Button  DockPanel.Dock="Right" Width="100" Height="35" Command="{Binding Path=UpdateCommand}" HorizontalAlignment="Right" Margin="0,0,50,0"> 
+				Übernehmen
+			</Button>
+	</DockPanel>-->
+
+
+</Grid>
+</UserControl>

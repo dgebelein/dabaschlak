@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="dabaschlak.ViewAbfrageSortierung"
+				 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"	
+				 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+				 xmlns:ui="clr-namespace:TTP.UiUtils;assembly=TtpUiUtils"
+				 mc:Ignorable="d"	
+				 FontFamily="Calibri" FontSize="15"
+				 Foreground="White" Background="#003366"
+				 d:DesignHeight="300" d:DesignWidth="300"
+>
+
+	<UserControl.Resources>
+		<ui:EnumBooleanConverter x:Key="enumBooleanConverter" />
+	</UserControl.Resources>
+
+	<Grid	 HorizontalAlignment="Stretch"  >
+		<Expander  >
+			<Expander.Header >
+				<StackPanel	Orientation="Horizontal" VerticalAlignment="Center">
+					<TextBlock FontSize="15" Margin="0,5,0,5"	>Ausgabe sortieren nach:</TextBlock>
+					<TextBlock FontSize="15"  FontStyle="Italic"	Margin="10,5,0,5"	Text="{Binding	HeaderSort}"	Foreground="Yellow"/>
+				</StackPanel>
+			</Expander.Header>
+
+			<StackPanel Orientation="Vertical">
+            <StackPanel	Orientation="Vertical" Background="#108080ff" Visibility="{Binding VisAuswahlAktionen}" >
+				<RadioButton 
+							Margin="30,20,0,0"  FontWeight="Normal"
+							Content="Datum" 
+							IsChecked="{Binding Path=SortAktion, 
+							Converter={StaticResource enumBooleanConverter}, ConverterParameter=Datum}"/>
+				<RadioButton 
+							Margin="30,10,0,0"  FontWeight="Normal"
+							Content="Standort" 
+							IsChecked="{Binding Path=SortAktion, 
+							Converter={StaticResource enumBooleanConverter}, ConverterParameter=Flaeche}"/>
+				<RadioButton 
+							Margin="30,10,0,0"  FontWeight="Normal"
+							Content="Versuchsbezeichnung" 
+							IsChecked="{Binding Path=SortAktion, 
+							Converter={StaticResource enumBooleanConverter}, ConverterParameter=Versuch}"/>
+
+				<RadioButton 
+							Margin="30,10,0,20"  FontWeight="Normal"
+							Content="Aktion" 
+							IsChecked="{Binding Path=SortAktion, 
+							Converter={StaticResource enumBooleanConverter}, ConverterParameter=Kategorie}"/>
+			</StackPanel>
+
+            <StackPanel	Orientation="Vertical" Background="#108080ff"  Visibility="{Binding VisAuswahlVersuche}" >
+				<RadioButton 
+							Margin="30,20,0,0"  FontWeight="Normal"
+							Content="Versuchsjahr" 
+							IsChecked="{Binding Path=SortVersuche, 
+							Converter={StaticResource enumBooleanConverter}, ConverterParameter=Datum}"/>
+				<RadioButton 
+							Margin="30,10,0,0"  FontWeight="Normal"
+							Content="Versuchsbezeichnung" 
+							IsChecked="{Binding Path=SortVersuche, 
+							Converter={StaticResource enumBooleanConverter}, ConverterParameter=Versuch}"/>
+				<RadioButton 
+							Margin="30,10,0,0"  FontWeight="Normal"
+							Content="Standort" 
+							IsChecked="{Binding Path=SortVersuche, 
+							Converter={StaticResource enumBooleanConverter}, ConverterParameter=Flaeche}"/>
+				<RadioButton 
+							Margin="30,10,0,0"  FontWeight="Normal"
+							Content="Versuchsleiter" 
+							IsChecked="{Binding Path=SortVersuche, 
+							Converter={StaticResource enumBooleanConverter}, ConverterParameter=Person}"/>
+				<RadioButton 
+							Margin="30,10,0,20"  FontWeight="Normal"
+							Content="Kulturpflanze" 
+							IsChecked="{Binding Path=SortVersuche, 
+							Converter={StaticResource enumBooleanConverter}, ConverterParameter=Kultur}"/>
+
+				</StackPanel>
+			</StackPanel>
+		</Expander>
+	</Grid>
+</UserControl>

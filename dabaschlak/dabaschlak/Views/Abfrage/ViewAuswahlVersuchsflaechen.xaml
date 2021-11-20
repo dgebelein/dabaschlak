@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="dabaschlak.ViewAuswahlVersuchsflaechen"
+					xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+					mc:Ignorable="d" 
+					FontFamily="Calibri" FontSize="15"
+					Foreground="White" Background="#003366"
+					d:DesignHeight="650" d:DesignWidth="620"
+					DataContext="{Binding VmVersuchsflaechen}">
+
+	<Grid  HorizontalAlignment="Stretch"  >
+		<Expander Background="Transparent">
+			<Expander.Header >
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<TextBlock FontSize="15" Margin="0,5,0,5" >Auswahl Versuchsflächen:</TextBlock>
+					<TextBlock FontSize="15"  FontStyle="Italic" Margin="10,5,0,5" Text="{Binding HeaderAuswahlVersuchsflaechen}" Foreground="{Binding HeaderColor}"/>
+				</StackPanel>
+			</Expander.Header>
+
+         <Grid Background="#108080ff" >
+				<Grid.RowDefinitions>
+					<RowDefinition  Height="*"/>
+					<RowDefinition  Height="60"/>
+					<RowDefinition  Height="60"/>
+				</Grid.RowDefinitions>
+
+				<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+					<Button	Width="150"	Height="35"	Margin="10,0,10,10" Command="{Binding Path=KeineFlaechenCommand}">
+						alle entfernen
+					</Button>
+					<Button	Width="150"	Height="35"	Margin="10,0,10,10" Command="{Binding Path=AlleFlaechenCommand}">
+						alle auswählen
+					</Button>
+
+				</StackPanel>
+				<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+					<Button	Width="130"	Height="35"	Margin="5,0,5,10" Command="{Binding Path=AlleAckerFlaechenCommand}">
+						alle Ackerflächen
+					</Button>
+					<Button	Width="130"	Height="35"	Margin="5,0,5,10" Command="{Binding Path=AlleKlimakammernCommand}">
+						alle Klimakammern
+					</Button>
+					<Button	Width="130"	Height="35"	Margin="5,0,10,10" Command="{Binding Path=AlleGewaechshaeuserCommand}">
+						alle Gewächshäuser
+					</Button>
+					<Button	Width="130"	Height="35"	Margin="5,0,5,10" Command="{Binding Path=AlleStellflaechenCommand}">
+						alle Stellflächen
+					</Button>					
+				</StackPanel>				
+
+				<DataGrid	Name="_dgVersuchsflaechen" Grid.Row="0" ItemsSource="{Binding	DataTableVersuchsflaechen}"	 HeadersVisibility="Column" 
+								VerticalGridLinesBrush="Gray"
+								Background="Gray"  BorderBrush="LightGray"
+								Width="400" Height="400"
+								Margin="20,15"
+								IsReadOnly="False"
+								CanUserAddRows="False"
+								CanUserDeleteRows="False"
+								SelectionUnit="FullRow"
+								ColumnHeaderStyle="{StaticResource HeaderStyle}"  
+								CellStyle="{StaticResource MyDataGridCell}" 
+								AutoGenerateColumns="False">
+
+					<DataGrid.Columns>
+                  <DataGridCheckBoxColumn Binding="{Binding Checked, UpdateSourceTrigger=PropertyChanged}" Header="  "   Width="40"/>
+						<DataGridTextColumn Binding="{Binding FlaeBez}" Header="Versuchsfläche" Width="210" IsReadOnly="True"/>
+						<DataGridTextColumn Binding="{Binding FlaeTyp}" Header="Typ" Width="130" IsReadOnly="True"/>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+
+		</Expander>
+	</Grid>
+
+</UserControl>

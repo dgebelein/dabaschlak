@@ -1,0 +1,504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{905C4FF5-BD0D-44B3-A8B1-BC1FC04AE00C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>dabaschlak</RootNamespace>
+    <AssemblyName>dabaschlak</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>dabaschlak64.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Awesomium.Core, Version=1.6.6.0, Culture=neutral, PublicKeyToken=e1a0d7c8071a5214, processorArchitecture=x86" />
+    <Reference Include="Awesomium.Windows.Controls, Version=1.6.6.0, Culture=neutral, PublicKeyToken=7a34e179b8b61c39, processorArchitecture=x86" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.102.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.102.0\lib\net40\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.102.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.102.0\lib\net40\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.102.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.102.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TtpResources, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>I:\TTP-V3\TtpResources\TtpResources\bin\Debug\TtpResources.dll</HintPath>
+    </Reference>
+    <Reference Include="TtpTheme, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>I:\TTP-V3\TtpTheme\TtpTheme\bin\Debug\TtpTheme.dll</HintPath>
+    </Reference>
+    <Reference Include="TtpUiUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>I:\TTP-V3\TtpUiUtils\TtpUiUtils\bin\Debug\TtpUiUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Cmd\CmdBase.cs" />
+    <Compile Include="Cmd\CmdItem.cs" />
+    <Compile Include="Cmd\CmdMenu.cs" />
+    <Compile Include="Cmd\CmdNode.cs" />
+    <Compile Include="Cmd\FlexItem.cs" />
+    <Compile Include="Cmd\RelayCommand.cs" />
+    <Compile Include="Data\Aktion.cs" />
+    <Compile Include="Data\Arbeitskategorien.cs" />
+    <Compile Include="Data\GlobData.cs" />
+    <Compile Include="Data\Flaeche.cs" />
+    <Compile Include="Data\Person.cs" />
+    <Compile Include="Data\sqlAccess.cs" />
+    <Compile Include="Data\Versuch.cs" />
+    <Compile Include="helpers\ActionMail.cs" />
+    <Compile Include="helpers\ActionMailSender.cs" />
+    <Compile Include="helpers\FlaecheArgs.cs" />
+    <Compile Include="helpers\HtmlCreator.cs" />
+    <Compile Include="helpers\VersuchArgs.cs" />
+    <Compile Include="helpers\WordStarter.cs" />
+    <Compile Include="Views\Abfrage\ViewAbfrageAuswahlVersuche.xaml.cs">
+      <DependentUpon>ViewAbfrageAuswahlVersuche.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Abfrage\ViewAbfrageAuswahlAktionen.xaml.cs">
+      <DependentUpon>ViewAbfrageAuswahlAktionen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Abfrage\ViewAbfrageSortierung.xaml.cs">
+      <DependentUpon>ViewAbfrageSortierung.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Abfrage\ViewAbfrageTexte.xaml.cs">
+      <DependentUpon>ViewAbfrageTexte.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Abfrage\ViewAuswahlJahre.xaml.cs">
+      <DependentUpon>ViewAuswahlJahre.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Abfrage\ViewAuswahlKategorien.xaml.cs">
+      <DependentUpon>ViewAuswahlKategorien.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Abfrage\ViewAuswahlVersuchsflaechen.xaml.cs">
+      <DependentUpon>ViewAuswahlVersuchsflaechen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Abfrage\ViewAuswahlVersuchsleiter.xaml.cs">
+      <DependentUpon>ViewAuswahlVersuchsleiter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Abfrage\ViewAuswahlZeitraum.xaml.cs">
+      <DependentUpon>ViewAuswahlZeitraum.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ausgaben\ViewVersuchsplaene.xaml.cs">
+      <DependentUpon>ViewVersuchsplaene.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ausgaben\WebBrowserBase.cs" />
+    <Compile Include="Views\Abfrage\ViewAbfrage.xaml.cs">
+      <DependentUpon>ViewAbfrage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Abfrage\ViewAbfrageAuswahl.xaml.cs">
+      <DependentUpon>ViewAbfrageAuswahl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\cmd u msg\CmdArea.xaml.cs">
+      <DependentUpon>CmdArea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\cmd u msg\CmdView.xaml.cs">
+      <DependentUpon>CmdView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\cmd u msg\MsgWindow.xaml.cs">
+      <DependentUpon>MsgWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\cmd u msg\MsgYNWindow.xaml.cs">
+      <DependentUpon>MsgYNWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Properties\PropertyAuswahlFlaechen.xaml.cs">
+      <DependentUpon>PropertyAuswahlFlaechen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Properties\PropertyAktion.xaml.cs">
+      <DependentUpon>PropertyAktion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Properties\PropertyFlaeche.xaml.cs">
+      <DependentUpon>PropertyFlaeche.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Properties\PropertyPerson.xaml.cs">
+      <DependentUpon>PropertyPerson.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Properties\PropertyVersuch.xaml.cs">
+      <DependentUpon>PropertyVersuch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stammdaten\ViewAlleFlaechen.xaml.cs">
+      <DependentUpon>ViewAlleFlaechen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stammdaten\ViewAlleVersuche.xaml.cs">
+      <DependentUpon>ViewAlleVersuche.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Stammdaten\ViewAllePersonen.xaml.cs">
+      <DependentUpon>ViewAllePersonen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auswahlen\ViewArbeitenListe.xaml.cs">
+      <DependentUpon>ViewArbeitenListe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auswahlen\ViewAuswahlFlaeche.xaml.cs">
+      <DependentUpon>ViewAuswahlFlaeche.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auswahlen\ViewAuswahlVersuch.xaml.cs">
+      <DependentUpon>ViewAuswahlVersuch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auswahlen\ViewFlaechenarbeiten.xaml.cs">
+      <DependentUpon>ViewFlaechenarbeiten.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ausgaben\ViewMeineNachrichten.xaml.cs">
+      <DependentUpon>ViewMeineNachrichten.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auswahlen\ViewNachrichtenzuordnung.xaml.cs">
+      <DependentUpon>ViewNachrichtenzuordnung.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Auswahlen\ViewVersuchsarbeiten.xaml.cs">
+      <DependentUpon>ViewVersuchsarbeiten.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ausgaben\ViewVersuchsprotokoll.xaml.cs">
+      <DependentUpon>ViewVersuchsprotokoll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ausgaben\ViewWeb.xaml.cs">
+      <DependentUpon>ViewWeb.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vm\VmAbfrage.cs" />
+    <Compile Include="Vm\VmAbfrageflaechen.cs" />
+    <Compile Include="Vm\VmAbfrageKategorien.cs" />
+    <Compile Include="Vm\VmAbfrageTexte.cs" />
+    <Compile Include="Vm\VmAbfrageVersuchsleiter.cs" />
+    <Compile Include="Vm\VmAlleFlaechen.cs" />
+    <Compile Include="Vm\VmAlleVersuche.cs" />
+    <Compile Include="Vm\VmBase.cs" />
+    <Compile Include="Vm\VmBrowser.cs" />
+    <Compile Include="Vm\VmDabaschlak.cs" />
+    <Compile Include="Vm\VmAllePersonen.cs" />
+    <Compile Include="Vm\VmExternFile.cs" />
+    <Compile Include="Vm\VmMeineNachrichten.cs" />
+    <Compile Include="Vm\VmNachrichtenzuordnung.cs" />
+    <Compile Include="Vm\VmArbeiten.cs" />
+    <Compile Include="Vm\VmVersuchsplaene.cs" />
+    <Compile Include="Vm\VmVersuchsprotokoll.cs" />
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\Abfrage\ViewAbfrageAuswahlVersuche.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Abfrage\ViewAbfrageAuswahlAktionen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Abfrage\ViewAbfrageSortierung.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Abfrage\ViewAbfrageTexte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Abfrage\ViewAuswahlJahre.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Abfrage\ViewAuswahlKategorien.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Abfrage\ViewAuswahlVersuchsflaechen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Abfrage\ViewAuswahlVersuchsleiter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Abfrage\ViewAuswahlZeitraum.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ausgaben\ViewVersuchsplaene.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Abfrage\ViewAbfrage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Abfrage\ViewAbfrageAuswahl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\cmd u msg\CmdArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\cmd u msg\CmdView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\cmd u msg\MsgWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\cmd u msg\MsgYNWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Properties\PropertyAuswahlFlaechen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Properties\PropertyAktion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Properties\PropertyFlaeche.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Properties\PropertyPerson.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Properties\PropertyVersuch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stammdaten\ViewAlleFlaechen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stammdaten\ViewAlleVersuche.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stammdaten\ViewAllePersonen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Auswahlen\ViewArbeitenListe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Auswahlen\ViewAuswahlFlaeche.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Auswahlen\ViewAuswahlVersuch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Auswahlen\ViewFlaechenarbeiten.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ausgaben\ViewMeineNachrichten.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Auswahlen\ViewNachrichtenzuordnung.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Auswahlen\ViewVersuchsarbeiten.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ausgaben\ViewVersuchsprotokoll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ausgaben\ViewWeb.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\error.png" />
+    <Resource Include="Resources\Images\info.png" />
+    <Resource Include="Resources\Images\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\dabaschlak64.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="dabaschlak64.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.102.0\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.102.0\build\net40\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Verwenden Sie die Wiederherstellung von NuGet-Paketen, um die fehlenden Dateien herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.102.0\build\net40\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.102.0\build\net40\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

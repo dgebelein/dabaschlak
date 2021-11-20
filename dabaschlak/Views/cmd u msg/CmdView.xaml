@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="dabaschlak.CmdView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:local="clr-namespace:dabaschlak"
+	
+	FontFamily="Calibri" FontSize="16"
+	mc:Ignorable="d" 
+	d:DesignHeight="700" d:DesignWidth="350">
+
+	<Grid	Width="350"	Background="{StaticResource CmdAreaBrush}" >
+		<DockPanel >
+			<StackPanel	Orientation="Vertical" DockPanel.Dock="Bottom">
+				<Label FontSize="12"	Margin="20,0">© 2017	by	Dieter Gebelein</Label>
+				<Label Content="alle	Rechte vorbehalten"	FontSize="12" Margin="33,0,0,10" />
+
+			</StackPanel>
+			<StackPanel	Orientation="Vertical" Margin="15,10" DockPanel.Dock="Top" >
+				<StackPanel	Orientation="Horizontal" Margin="10,20,0,50">
+				<Label FontSize="28"	Foreground="DeepSkyBlue"	VerticalAlignment="Center">Dabaschlak</Label>
+				<TextBlock Foreground="DeepSkyBlue"	  HorizontalAlignment="Right"	 VerticalAlignment="Center" Margin="25,0,0,0"> Schlagkartei	Institut	GF</TextBlock>
+				</StackPanel>
+
+				<StackPanel	Orientation="Horizontal" Margin="0,20,0,20" Visibility="{Binding VisUserSelect}">
+					<Label VerticalAlignment="Center" Margin="0,0,5,0"	 >Bearbeiter: </Label>
+					<ComboBox	Height="25"	Width="184"	VerticalAlignment="Center"	 IsEditable="True"  
+									ItemsSource="{Binding Path=UserNames}"
+									SelectedItem="{Binding Path=UserName}"/>
+				</StackPanel>
+
+				<StackPanel	Orientation="Horizontal" Margin="0,20,0,20" Visibility="{Binding VisUserLabel}">
+					<Label VerticalAlignment="Center" Margin="0,0,5,0"	 Content="Bearbeiter:" />
+					<Label VerticalAlignment="Center" Margin="0,0,5,0"	Content="{Binding	UserName}"	Foreground="Yellow"/>
+				</StackPanel>
+
+				<!--<StackPanel Orientation="Horizontal" Margin="0,20,0,20">
+					<Label VerticalAlignment="Center" Margin="0,0,5,0"	 >Bearbeiter:</Label>
+					<TextBlock Text="{Binding UserName}"  Foreground="AntiqueWhite"/>
+				</StackPanel>-->
+
+
+
+				
+			
+			
+			</StackPanel>
+			<local:CmdArea	/>
+
+		</DockPanel>
+
+	</Grid>
+</UserControl>

@@ -1,0 +1,342 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Input;
+
+namespace dabaschlak
+{
+	class VmVersuchsprotokoll:VmBase
+	{
+		#region variable
+		
+		VmAlleVersuche _vmVersuche;
+		int _idVersuch;
+		DataTable _dtArbeiten;
+		Versuch _dataVersuch;
+		string _browserFilename;
+		
+		RelayCommand _printCommand;
+		RelayCommand _saveCommand;
+		RelayCommand _exportCommand;
+		RelayCommand _sortVgCommand;
+
+
+
+
+		#endregion
+
+		#region construction+ init
+
+		public VmVersuchsprotokoll()
+		{
+			Init();
+
+			_vmVersuche = new VmAlleVersuche(this);
+			_vmVersuche.SelectionChanged += VersuchSelected;
+			ViewVisual = new ViewVersuchsprotokoll();
+		}
+		void Init()
+		{
+			_printCommand = new RelayCommand(param => this.PrintReport());
+			_saveCommand = new RelayCommand(param => this.SaveReport());
+			_exportCommand = new RelayCommand(param => this.ExportReport());
+			_sortVgCommand = new RelayCommand(param => this.SortVg());
+
+		}
+
+		#endregion
+
+		#region DataIO
+
+		private void VersuchSelected(object source, VersuchArgs e)
+		{
+			_idVersuch = e.IdVersuch;
+
+			if (!ReadData())
+            return;
+
+			_browserFilename = GetReportFile();
+			if(string.IsNullOrEmpty(_browserFilename))
+			{ 
+				MsgWindow.Show("Protokoll konnte erstellt werden", "Fehler beim Schreiben in eine temporäre Datei", MessageLevel.Error);
+			}
+			else
+			{ 
+				var uri = new Uri(_browserFilename, UriKind.Absolute);
+				((ViewVersuchsprotokoll)ViewVisual)._aweBrowser.Source = uri;
+			}
+		}
+
+		private bool ReadData()
+		{
+			_dtArbeiten = SqlAccess.GetArbeitenWithVersuch(_idVersuch);
+			if (_dtArbeiten == null)
+			{
+				MsgWindow.Show("Aktionen konnten nicht gelesen werden", SqlAccess.ErrorMsg, MessageLevel.Error);
+				return false;
+			}
+
+			_dataVersuch = _vmVersuche.GetVersuchFromId(_idVersuch);
+			if (_dataVersuch == null)
+			{
+				MsgWindow.Show("Versuchsdaten konnten nicht gelesen werden", SqlAccess.ErrorMsg, MessageLevel.Error);
+				return false;
+			}
+
+			return true;
+
+		}
+
+		#endregion
+		
+		#region Properties
+
+		public object DCAuswahlListe 
+		{
+			get { return  (object)_vmVersuche; }
+		}
+
+
+
+		#endregion
+
+		#region Report erstellen
+
+		private string GetReportFile()
+		{
+			HtmlCreator creator = new HtmlCreator();
+			List<int> colWidth = new List<int>() {7,20,0,20};
+			List<string> headers = new List<string>();
+			List<List<string>> rows = new List<List<string>>();
+
+			headers.Add("Datum");
+			headers.Add("Aktion");
+			headers.Add("Notizen");
+			headers.Add("Arbeitskraft");
+			
+			foreach (DataRow dtRow in _dtArbeiten.Rows)
+			{
+				List<string> htmlRow = new List<string>();
+				DateTime dt =  DateTime.Parse(Convert.ToString(dtRow["Datum"]));
+				htmlRow.Add( dt.ToString("dd.MM.yyyy"));
+
+				htmlRow.Add( Convert.ToString(dtRow["Aktion"]));
+				htmlRow.Add(Convert.ToString(dtRow["Notizen"]));//.Replace("\r\n", "<br/>"));
+				htmlRow.Add( Convert.ToString(dtRow["PersonName"]));
+				rows.Add(htmlRow);
+			}
+
+
+			return creator.GetVersuchsprotokoll(_dataVersuch, headers, rows, colWidth);
+		}
+
+
+		private bool ContainsNumber(string txt, int num)
+		{
+			string pattern =@"[^0-9]"+ num + @"\b";
+			Match match = Regex.Match(txt, pattern);
+			return match.Success;
+
+		}
+
+		private int GetAffectedBitMask(string txt)
+		{
+			int retVal = 0;
+			//string pattern = @"\bVG.*\W";
+			string pattern = @"\bvg[ 0-9:,;/]*[^a-z]";
+
+			MatchCollection matches = Regex.Matches(txt.ToLower(),pattern);
+
+			foreach (Match match in matches)
+			{
+				foreach (Capture capture in match.Captures)
+				{
+					for (int i = 0; i < 32; i++)
+						if (ContainsNumber(capture.Value, i + 1))
+							retVal |= (1 << i);
+
+					//Console.WriteLine("Index={0}, Value={1}", capture.Index, capture.Value);
+				}
+			}
+
+			return retVal;
+		}
+
+		private string GetSortedVgFile()
+		{
+			HtmlCreator creator = new HtmlCreator();
+			List<int> colWidth = new List<int>() { 7, 20, 0, 20 };
+			List<string> headers = new List<string>();
+			List<List<string>> rows = new List<List<string>>();
+			int[] affectedVg = new int[_dtArbeiten.Rows.Count];
+
+
+			headers.Add("Datum");
+			headers.Add("Aktion");
+			headers.Add("Notizen");
+			headers.Add("Arbeitskraft");
+
+			int id = 0;
+			foreach (DataRow dtRow in _dtArbeiten.Rows)
+			{
+				affectedVg[id++] = GetAffectedBitMask(Convert.ToString(dtRow["Notizen"]));
+			}
+
+			id = 0;
+			foreach (DataRow dtRow in _dtArbeiten.Rows) // für alle - ohne VG-Angabe
+			{
+				if(affectedVg[id++] == 0)
+				{ 
+					List<string> htmlRow = new List<string>();
+					DateTime dt = DateTime.Parse(Convert.ToString(dtRow["Datum"]));
+					htmlRow.Add(dt.ToString("dd.MM.yyyy"));
+
+					htmlRow.Add(Convert.ToString(dtRow["Aktion"]));
+					htmlRow.Add(Convert.ToString(dtRow["Notizen"]));
+					htmlRow.Add(Convert.ToString(dtRow["PersonName"]));
+					rows.Add(htmlRow);
+				}
+			}
+
+			// danach für einzelne VG
+			for (int vg=0; vg<32;vg++)
+			{
+				id = 0;
+				bool needsHeader = true;
+				int bitMask = (1 << vg);
+				foreach (DataRow dtRow in _dtArbeiten.Rows) 
+				{
+					if ((affectedVg[id++] & bitMask)!=0 )
+					{
+						if(needsHeader)
+						{
+							List<string> emptyLine = new List<string>();
+							emptyLine.Add("<br/> "); emptyLine.Add(""); emptyLine.Add(""); emptyLine.Add("");
+							rows.Add(emptyLine);
+
+							List<string> htmlVg = new List<string>();
+							htmlVg.Add($"<b>VG {vg+1}:</b>");
+							rows.Add(htmlVg);
+							needsHeader = false;
+						}
+
+						List<string> htmlRow = new List<string>();
+						DateTime dt = DateTime.Parse(Convert.ToString(dtRow["Datum"]));
+						htmlRow.Add(dt.ToString("dd.MM.yyyy"));
+
+						htmlRow.Add(Convert.ToString(dtRow["Aktion"]));
+						htmlRow.Add(Convert.ToString(dtRow["Notizen"]));
+						htmlRow.Add(Convert.ToString(dtRow["PersonName"]));
+						rows.Add(htmlRow);
+					}
+				}
+
+			}
+
+
+			return creator.GetVersuchsprotokoll(_dataVersuch, headers, rows, colWidth);
+		}
+
+		#endregion
+
+		#region Print, Save, Export
+
+		public ICommand PrintCommand{	get {	return _printCommand; }	}
+		public ICommand SaveCommand {	get {	return _saveCommand; }	}
+		public ICommand ExportCommand{get {	return _exportCommand; }}
+		public ICommand SortVgCommand { get { return _sortVgCommand; } }
+
+
+		void SortVg()
+		{
+			_browserFilename = GetSortedVgFile();
+
+			if (string.IsNullOrEmpty(_browserFilename))
+			{
+				MsgWindow.Show("Protokoll konnte erstellt werden", "Fehler beim Schreiben in eine temporäre Datei", MessageLevel.Error);
+			}
+			else
+			{
+				var uri = new Uri(_browserFilename, UriKind.Absolute);
+				((ViewVersuchsprotokoll)ViewVisual)._aweBrowser.Source = uri;
+			}
+		}
+
+		void PrintReport()
+		{
+			((ViewVersuchsprotokoll)(ViewVisual))._aweBrowser.Print();
+		}
+
+		void SaveReport()
+		{
+			SaveFileDialog sfd = new SaveFileDialog();
+			sfd.Filter = "Html Datei|*.html";
+			sfd.Title = "Versuchsprotokoll als Datei speichern";
+			sfd.FileName = _dataVersuch.VerBez.Replace(" ", "_");
+			sfd.ShowDialog();
+
+			if(sfd.FileName!="")
+			{
+				try { 
+					File.Copy(_browserFilename, sfd.FileName, true);
+				}
+				catch(Exception e)
+				{
+					MsgWindow.Show("Versuchsprotokoll kann nicht als Datei gespeichert werden:", e.Message, MessageLevel.Error);
+				}
+			}
+
+		}
+
+		void ExportReport()
+		{
+			Microsoft.Office.Interop.Excel.Application excel = null;
+
+			try
+			{
+				//Excel-Instanz erzeugen 
+				excel = new Microsoft.Office.Interop.Excel.Application();
+
+				// Arbeitsmappe ohne Vorlage erzeugen
+				object missing = Missing.Value;
+				excel.Workbooks.Add(missing);
+
+				// aktives Workbook referenzieren
+				Microsoft.Office.Interop.Excel.Workbook wb = excel.ActiveWorkbook;
+
+				// Arbeitsblatt erzeugen und referenzieren
+				if (wb.Worksheets.Count == 0)
+					wb.Worksheets.Add(missing, missing, missing, missing);
+				Microsoft.Office.Interop.Excel.Worksheet ws = (Microsoft.Office.Interop.Excel.Worksheet)wb.Worksheets[1];
+
+				CopyBrowserCode();
+				ws.Paste();
+				// ActiveSheet.Paste
+
+				// erst am Ende sichtbar machen, weil Programmabstürze drohen, wenn mit Excel gearbeitet wird, solange die Datenübertragung dauert
+				excel.Visible = true;
+			}
+			catch (Exception)
+			{
+				if (excel != null)
+					excel.Quit();
+			}
+		}
+
+		void CopyBrowserCode()
+		{
+			((ViewVersuchsprotokoll)(ViewVisual))._aweBrowser.SelectAll();
+			((ViewVersuchsprotokoll)(ViewVisual))._aweBrowser.Copy();
+			((ViewVersuchsprotokoll)(ViewVisual))._aweBrowser.ExecuteJavascriptWithResult("document.getSelection().removeAllRanges()");// Markierung weg
+	}
+		
+	#endregion
+	}
+}

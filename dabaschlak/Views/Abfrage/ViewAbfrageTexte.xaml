@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="dabaschlak.ViewAbfrageTexte"
+				 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"	
+				 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+				 xmlns:local="clr-namespace:dabaschlak"
+				 mc:Ignorable="d"	
+				 FontFamily="Calibri" FontSize="15"
+				 Foreground="White" Background="#003366"				 
+				 d:DesignHeight="300" d:DesignWidth="390"
+				 DataContext="{Binding VmSuchTexte}">
+	
+	<Grid	 HorizontalAlignment="Stretch"  >
+		<Expander  >
+			<Expander.Header >
+				<StackPanel	Orientation="Horizontal" VerticalAlignment="Center">
+					<TextBlock FontSize="15" Margin="0,5,0,5"	>Suchtexte:</TextBlock>
+               <TextBlock FontSize="15"  FontStyle="Italic"	Margin="10,5,0,5"	Text="{Binding	HeaderSuchTexte}"	Foreground="Yellow"/>
+				</StackPanel>
+			</Expander.Header>
+
+			<StackPanel Orientation="Vertical">
+
+            <StackPanel	Orientation="Vertical" Background="#108080ff"  Visibility="{Binding VisVersuche }">
+					<StackPanel	Orientation="Horizontal"  Margin="10">
+						<Label Width="200" Content="'Versuch' enthält: "	VerticalAlignment="Center" HorizontalContentAlignment="right"/>
+						<TextBox	 Width="150" Height="25" Margin="5,0"	 Text="{Binding VersuchSuchText,	UpdateSourceTrigger=PropertyChanged}"/>
+					</StackPanel>	
+					<StackPanel	Orientation="Horizontal"  Margin="10">
+						<Label  Width="200" Content="'Kulturpflanze'	enthält:	"	VerticalAlignment="Center"	 HorizontalContentAlignment="right"	/>
+						<TextBox	 Width="150" Height="25" Margin="5,0"	 Text="{Binding KulturSuchText, UpdateSourceTrigger=PropertyChanged}" />
+					</StackPanel>
+				</StackPanel>
+
+            <StackPanel	Orientation="Vertical" Background="#108080ff"  Visibility="{Binding VisAktionen}">
+						<StackPanel	Orientation="Horizontal"  Margin="10">
+							<Label Width="200" Content="'Versuch' enthält: "	VerticalAlignment="Center" HorizontalContentAlignment="right"/>
+							<TextBox	 Width="150" Height="25" Margin="5,0"	 Text="{Binding AktionVersuchSuchText,	UpdateSourceTrigger=PropertyChanged}"/>
+						</StackPanel>
+						<StackPanel	Orientation="Horizontal"  Margin="10">
+							<Label  Width="200" Content="'Notizen'	enthält:	"	VerticalAlignment="Center"	 HorizontalContentAlignment="right"	/>
+						<TextBox	 Width="150" Height="25" Margin="5,0"	 Text="{Binding AktionNotizenSuchText, UpdateSourceTrigger=PropertyChanged}" />
+						</StackPanel>
+					</StackPanel>
+
+
+				
+
+
+			</StackPanel>
+
+		</Expander>
+	</Grid>
+</UserControl>

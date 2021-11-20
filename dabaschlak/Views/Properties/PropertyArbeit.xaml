@@ -1,0 +1,85 @@
+﻿<Window x:Class="dabaschlak.PropertyArbeit"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+		xmlns:local="clr-namespace:dabaschlak"
+		mc:Ignorable="d" 
+		WindowStyle="SingleBorderWindow" 
+		SizeToContent="WidthAndHeight" 
+		ResizeMode="NoResize"  WindowStartupLocation="CenterScreen"
+		FontFamily="Calibri" FontSize="15" Foreground="White" Background="#FF3B3B3C"
+		d:DesignHeight="530" d:DesignWidth="450">
+
+<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/TtpTheme;component/TtpTheme.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+         
+   </ResourceDictionary>
+
+	</Window.Resources>
+
+<Grid>
+	<Grid.ColumnDefinitions>
+		<ColumnDefinition Width="100"/>
+		<ColumnDefinition Width="300"/>
+		<ColumnDefinition Width="50"/>
+
+	</Grid.ColumnDefinitions>
+	<Grid.RowDefinitions>
+		<RowDefinition Height="70"/>
+		<RowDefinition Height="50"/>
+		<RowDefinition Height="50"/>
+		<RowDefinition Height="50"/>
+		<RowDefinition Height="Auto"/>
+		<RowDefinition Height="80"/>
+	</Grid.RowDefinitions>
+
+	<TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" Text="{Binding PropHeader}" VerticalAlignment="Center" FontSize="18"/>
+
+	<TextBlock Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0" Text="Datum:"/>
+	<DatePicker Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" 
+					Style="{StaticResource errorDateTimeControl}"		
+					SelectedDate="{Binding PropDatum,ValidatesOnDataErrors=True}"
+	/>
+
+	<TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0" Text="Person:"/>
+	<ComboBox Grid.Row="2" Grid.Column="1"	Height="25" Width="200"  VerticalAlignment="Center"  HorizontalAlignment="Left" IsEditable="True"  
+					Style="{StaticResource errorComboBox}" 
+					ItemsSource="{Binding Path=PropUsernames}"
+					SelectedItem="{Binding Path=PropPerson, ValidatesOnDataErrors=True}"/>
+
+	<TextBlock Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="5,0" Text="Aktion:"/>
+	<ComboBox Grid.Row="3" Grid.Column="1"	Height="25" Width="250"  VerticalAlignment="Center"  HorizontalAlignment="Left" IsEditable="False"  
+					Style="{StaticResource errorComboBox}"
+					ItemsSource="{Binding Path=PropAktionen}"
+					SelectedItem="{Binding Path=PropAktion, ValidatesOnDataErrors=True}"/>
+
+
+	<TextBlock  Grid.Row= "4" Text="Notizen:" HorizontalAlignment="Right" Margin="5,0"/>
+	<TextBox Grid.Row="4" Grid.Column="1" Width="300" Height="200" Style="{StaticResource errorControl}"
+				TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding PropNotizen, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+   <!--<Border Grid.Row="5"  Grid.Column="0" Grid.ColumnSpan="3" Background="#303030" BorderThickness="1" BorderBrush="Black" Margin="0,10,0,0">-->
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="5" Grid.ColumnSpan="3">
+		<Button  Width="135" Height="35" Command="{Binding Path=PropUpdateCommand}" Margin="25,15">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+					<Image Source="pack://application:,,,/TtpResources;Component/Images/update.png" Style="{StaticResource ButtonImageStyle}"
+							Height="18" Margin="0,0,5,0"/>
+					<Label Content="Übernehmen" VerticalAlignment="Center"  HorizontalAlignment="Left" Width="80"/>
+				</StackPanel>			
+		</Button> 
+   	<Button  Width="135" Height="35" Command="{Binding Path=PropCloseCommand}" Margin="0,15,50,15" >
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+					<Image Source="pack://application:,,,/TtpResources;Component/Images/cancel.png" Style="{StaticResource ButtonImageStyle}"
+							Height="24" Margin="10,0,5,0"/>
+					<Label Content="Abbrechen" VerticalAlignment="Center"  HorizontalAlignment="Left" Width="80"/>
+				</StackPanel>
+			</Button>  
+	</StackPanel>
+	<!--</Border>-->   
+</Grid>
+
+</Window>

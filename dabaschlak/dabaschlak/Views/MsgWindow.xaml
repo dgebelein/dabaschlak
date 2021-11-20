@@ -1,0 +1,63 @@
+﻿<Window x:Class="dabaschlak.MsgWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:dabaschlak"
+             MinWidth="480" MinHeight="280" SizeToContent="WidthAndHeight"
+				 WindowStartupLocation="CenterScreen"
+				 Title="Dabaschlak Meldung"
+				 Loaded="This_Loaded"		 
+>
+   <Window.Resources>
+      <ResourceDictionary>
+         <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="pack://application:,,,/TtpTheme;component/TtpTheme.xaml"/>
+         </ResourceDictionary.MergedDictionaries>
+      </ResourceDictionary>
+   </Window.Resources>
+
+   <Grid Background="{StaticResource DialogBackgroundBrush}">
+      <DockPanel LastChildFill="False">
+
+         
+
+         <Grid DockPanel.Dock="Top" Margin="20,10" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="58"/>
+               <ColumnDefinition Width="360" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+               <RowDefinition/>
+               <RowDefinition/>
+               <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Name="Message" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" 
+				FontWeight="Medium" Margin="10,30,0,25"  Foreground="{StaticResource TextBrush}"
+				TextAlignment="Left" MaxWidth="360" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" 
+				FontFamily="Segoe UI" FontSize="15"/>
+
+            <Image Name="msgSymbol" Grid.Column="0" Grid.Row="1" Height="48" HorizontalAlignment="Left" Source="/dabaschlak;component/resources/Images/error.png" />
+
+
+
+            <TextBlock Name="Detail" Grid.Column="1" Grid.Row="1"  
+				TextAlignment="Left" MaxWidth="360" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" Foreground="{StaticResource TextBrush}" 
+				FontFamily="Segoe UI" FontSize="13" />
+
+
+
+         </Grid>
+
+         <Grid DockPanel.Dock="Bottom" Margin="0,10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+               <Button Width="150" Height="25" Click="CmdClose">Schließen</Button>
+            </StackPanel>
+         </Grid>
+
+
+
+      </DockPanel>
+   </Grid>
+</Window>

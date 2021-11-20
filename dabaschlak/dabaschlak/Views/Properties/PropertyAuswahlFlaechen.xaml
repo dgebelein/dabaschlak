@@ -1,0 +1,58 @@
+﻿<Window x:Class="dabaschlak.PropertyAuswahlFlaechen"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	WindowStyle="SingleBorderWindow" 
+	SizeToContent="WidthAndHeight" 
+	ResizeMode="NoResize"  WindowStartupLocation="CenterScreen"
+	FontFamily="Calibri" FontSize="15" Foreground="White" Background="#FF3B3B3C">
+
+<Grid>
+	<Grid.RowDefinitions>
+		<RowDefinition Height="80"/>
+		<RowDefinition Height="*"/>
+		<RowDefinition Height="80"/>
+	</Grid.RowDefinitions>
+	
+	<StackPanel Orientation="Horizontal"	HorizontalAlignment="Left"	VerticalAlignment="Center"	Margin="25,0,0,0">
+		<TextBlock Text="Standorte für Versuch"   Foreground="White" FontSize="20"  Margin="20,0,0,0"   />
+		<TextBlock Text="{Binding Versuchname}"   Foreground="White" FontSize="20" />
+	</StackPanel>
+
+	<DataGrid  Name="_dgStandorte" Grid.Row="1" ItemsSource="{Binding	DataTableStandorte}"	 HeadersVisibility="Column" 
+			VerticalGridLinesBrush="Gray"
+			Background="Gray"  BorderBrush="LightGray"
+			Width="392" Height="400"
+			Margin="20,0"
+			IsReadOnly="False"
+			CanUserAddRows="False"
+			CanUserDeleteRows="False"
+			SelectionUnit="FullRow"
+			ColumnHeaderStyle="{StaticResource HeaderStyle}"  
+			CellStyle="{StaticResource MyDataGridCell}" 
+			AutoGenerateColumns="False">
+
+		<DataGrid.Columns>
+				<DataGridCheckBoxColumn Binding="{Binding doAssign, UpdateSourceTrigger=PropertyChanged}" Header="  "   Width="40"/>		
+			<DataGridTextColumn Binding="{Binding FlaeBez}" Header="Standort" Width="350" IsReadOnly="True"/> 
+		</DataGrid.Columns>
+	</DataGrid>
+
+	<StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right">
+		<Button  Width="135" Height="35" Command="{Binding Path=StandorteUpdateCommand}" Margin="50,15">
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+				<Image Source="pack://application:,,,/TtpResources;Component/Images/update.png" Style="{StaticResource ButtonImageStyle}"
+						Height="18" Margin="10,0,5,0"/>
+				<Label Content="Übernehmen" VerticalAlignment="Center"  HorizontalAlignment="Left" Width="80"/>
+			</StackPanel>			
+		</Button>  
+
+		<Button  Width="135" Height="35" Command="{Binding Path=StandorteCloseCommand}" Margin="0,15,20,15" >
+			<StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+				<Image Source="pack://application:,,,/TtpResources;Component/Images/cancel.png" Style="{StaticResource ButtonImageStyle}"
+						Height="24" Margin="10,0,5,0"/>
+				<Label Content="Abbrechen" VerticalAlignment="Center"  HorizontalAlignment="Left" Width="80"/>
+			</StackPanel>
+		</Button> 
+	</StackPanel>
+</Grid>
+</Window>
